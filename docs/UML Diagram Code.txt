@@ -1,0 +1,86 @@
+@startuml
+
+' Abstract Book class
+abstract class Book {
+    -String isbn
+    -String title
+    -String author
+    -int publishYear
+    -double price
+
+    +getISBN(): String
+    +getTitle(): String
+    +getPublishYear(): int
+    +getPrice(): double
+    +getAuthorName(): String
+    +setTitle(title: String): void
+    +setPublishYear(year: int): void
+    +setPrice(price: double): void
+    +setAuthorName(name: String): void
+    +purchase(quantity: int, email: String, address: String): double
+    +isAvailable(): boolean
+}
+
+' Book types
+class PaperBook {
+    -int stock
+
+    +getStock(): int
+    +isAvailable(): boolean
+    +reduceStock(quantity: int): void
+    +setStock(stock: int): void
+    +purchase(quantity: int, email: String, address: String): double
+}
+
+class EBook {
+    -String fileType
+
+    +getFileType(): String
+    +setFileType(fileType: String): void
+    +purchase(quantity: int, email: String, address: String): double
+    +isAvailable(): boolean
+}
+
+class ShowcaseBook {
+    +isAvailable(): boolean
+    +purchase(quantity: int, email: String, address: String): double
+}
+
+Book <|-- PaperBook
+Book <|-- EBook
+Book <|-- ShowcaseBook
+
+' Inventory/Business logic class
+class QuantumBookstore {
+    -Map<String, Book> inventory
+
+    +addBook(Book): void
+    +removeOutdatedBooks(thresholdYears: int): List<Book>
+    +buyBook(isbn: String, quantity: int, email: String, address: String): double
+    +findBook(isbn: String): Book
+    +getAllBooks(): List<Book>
+    +searchByAuthor(authorName: String): List<Book>
+    +searchByTitle(title: String): List<Book>
+}
+
+' External Services
+class ShippingService {
+    +sendTo(address: String): void
+}
+
+class MailService {
+    +sendTo(email: String): void
+}
+
+' Testing
+class QuantumBookstoreFullTest {
+    +runAll(): void
+}
+
+' Relationships
+QuantumBookstore --> Book
+QuantumBookstore --> ShippingService
+QuantumBookstore --> MailService
+QuantumBookstoreFullTest --> QuantumBookstore
+
+@enduml
