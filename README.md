@@ -135,15 +135,15 @@ java Main
 
 ## Tests
 
-[Test1](images/Test1.png)
+![Test1](images/Test1.PNG)
 
-[Test2](images/Test2.png)
+![Test2](images/Test2.PNG)
 
-[Test3](images/Test3.png)
+![Test3](images/Test3.PNG)
 
-[Test4](images/Test4.png)
+![Test4](images/Test4.PNG)
 
-[Test5](images/Test5.png)
+![Test5](images/Test5.PNG)
 
 ## Author
 
