@@ -145,6 +145,8 @@ java Main
 
 ![Test5](images/Test5.PNG)
 
+![Test6](images/Test6.PNG)
+
 ## Author
 
 Fawry Rise Journey Challenge – Intern Submission  
