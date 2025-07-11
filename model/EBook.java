@@ -1,20 +1,21 @@
 package model;
 
-import model.Book;
 import service.MailService;
 
 public class EBook extends Book {
+
     private String fileType;
 
     /**
      * Constructs a new EBook with the specified details and file type.
-     * 
-     * @param isbn        The unique identifier for the book
-     * @param title       The title of the book
+     *
+     * @param isbn The unique identifier for the book
+     * @param title The title of the book
      * @param publishYear The year when the book was published
-     * @param price       The price of the book
-     * @param authorName  The name of the book's author
-     * @param fileType    The file format of the eBook (e.g., "PDF", "EPUB", "MOBI")
+     * @param price The price of the book
+     * @param authorName The name of the book's author
+     * @param fileType The file format of the eBook (e.g., "PDF", "EPUB",
+     * "MOBI")
      */
     public EBook(String isbn, String title, int publishYear, double price, String authorName, String fileType) {
         super(isbn, title, publishYear, price, authorName);
@@ -23,7 +24,7 @@ public class EBook extends Book {
 
     /**
      * Gets the file type of the eBook.
-     * 
+     *
      * @return The file type string
      */
     public String getFileType() {
@@ -32,7 +33,7 @@ public class EBook extends Book {
 
     /**
      * Sets the file type of the eBook.
-     * 
+     *
      * @param fileType The new file type
      */
     public void setFileType(String fileType) {
@@ -40,12 +41,12 @@ public class EBook extends Book {
     }
 
     /**
-     * Processes the purchase of an eBook.
-     * EBooks are always available and are sent via email.
-     * 
+     * Processes the purchase of an eBook. EBooks are always available and are
+     * sent via email.
+     *
      * @param quantity The quantity to purchase
-     * @param email    The customer's email address
-     * @param address  The customer's shipping address (not used for eBooks)
+     * @param email The customer's email address
+     * @param address The customer's shipping address (not used for eBooks)
      * @return The total amount paid
      */
     @Override
@@ -63,7 +64,7 @@ public class EBook extends Book {
 
     /**
      * EBooks are always available for purchase.
-     * 
+     *
      * @param quantity The requested quantity
      * @return Always returns true as eBooks have unlimited availability
      */

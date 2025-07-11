@@ -1,15 +1,15 @@
-import model.Book;
+package model;
 
 public class ShowcaseBook extends Book {
 
     /**
      * Constructs a new ShowcaseBook with the specified details.
-     * 
-     * @param isbn        The unique identifier for the book
-     * @param title       The title of the book
+     *
+     * @param isbn The unique identifier for the book
+     * @param title The title of the book
      * @param publishYear The year when the book was published
-     * @param price       The display price of the book (for reference only)
-     * @param authorName  The name of the book's author
+     * @param price The display price of the book (for reference only)
+     * @param authorName The name of the book's author
      */
     public ShowcaseBook(String isbn, String title, int publishYear, double price, String authorName) {
         super(isbn, title, publishYear, price, authorName);
@@ -17,7 +17,7 @@ public class ShowcaseBook extends Book {
 
     /**
      * Showcase books are never available for purchase.
-     * 
+     *
      * @param quantity The requested quantity
      * @return Always returns false as showcase books cannot be purchased
      */
@@ -28,13 +28,13 @@ public class ShowcaseBook extends Book {
 
     /**
      * Attempts to purchase a showcase book will always throw an exception.
-     * 
+     *
      * @param quantity The quantity to purchase
-     * @param email    The customer's email address
-     * @param address  The customer's shipping address
+     * @param email The customer's email address
+     * @param address The customer's shipping address
      * @return Never returns as it always throws an exception
-     * @throws UnsupportedOperationException Always thrown as showcase books cannot
-     *                                       be purchased
+     * @throws UnsupportedOperationException Always thrown as showcase books
+     * cannot be purchased
      */
     @Override
     public double purchase(int quantity, String email, String address) {

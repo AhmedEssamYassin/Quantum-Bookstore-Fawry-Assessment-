@@ -1,10 +1,12 @@
+package model;
+
 import java.util.*;
 import java.util.stream.Collectors;
-import model.Book;
 import service.MailService;
 
 public class QuantumBookstore {
-    private Map<String, Book> inventory;
+
+    private final Map<String, Book> inventory;
 
     /**
      * Constructs a new QuantumBookstore with an empty inventory.
@@ -14,9 +16,9 @@ public class QuantumBookstore {
     }
 
     /**
-     * Adds a book to the inventory.
-     * If a book with the same ISBN already exists, it will be replaced.
-     * 
+     * Adds a book to the inventory. If a book with the same ISBN already
+     * exists, it will be replaced.
+     *
      * @param book The book to add to the inventory
      */
     public void addBook(Book book) {
@@ -30,9 +32,9 @@ public class QuantumBookstore {
     }
 
     /**
-     * Removes and returns outdated books that are older than the specified number
-     * of years.
-     * 
+     * Removes and returns outdated books that are older than the specified
+     * number of years.
+     *
      * @param yearsThreshold The number of years to consider a book outdated
      * @return A list of removed outdated books
      */
@@ -64,13 +66,14 @@ public class QuantumBookstore {
 
     /**
      * Purchases a book from the inventory.
-     * 
-     * @param isbn     The ISBN of the book to purchase
+     *
+     * @param isbn The ISBN of the book to purchase
      * @param quantity The quantity to purchase
-     * @param email    The customer's email address
-     * @param address  The customer's shipping address
+     * @param email The customer's email address
+     * @param address The customer's shipping address
      * @return The total amount paid for the purchase
-     * @throws IllegalArgumentException if the book is not found or not available
+     * @throws IllegalArgumentException if the book is not found or not
+     * available
      */
     public double buyBook(String isbn, int quantity, String email, String address) {
         if (isbn == null || isbn.trim().isEmpty()) {
@@ -106,7 +109,7 @@ public class QuantumBookstore {
 
     /**
      * Finds a book in the inventory by its ISBN.
-     * 
+     *
      * @param isbn The ISBN of the book to find
      * @return The book if found, null otherwise
      */
@@ -116,7 +119,7 @@ public class QuantumBookstore {
 
     /**
      * Gets all books in the inventory.
-     * 
+     *
      * @return A list of all books in the inventory
      */
     public List<Book> getAllBooks() {
@@ -125,9 +128,9 @@ public class QuantumBookstore {
 
     /**
      * Gets all books of a specific type.
-     * 
+     *
      * @param bookType The class type of books to retrieve
-     * @param <T>      The type parameter extending Book
+     * @param <T> The type parameter extending Book
      * @return A list of books of the specified type
      */
     @SuppressWarnings("unchecked")
@@ -140,7 +143,7 @@ public class QuantumBookstore {
 
     /**
      * Gets the total number of books in the inventory.
-     * 
+     *
      * @return The total count of books
      */
     public int getInventorySize() {
@@ -149,7 +152,7 @@ public class QuantumBookstore {
 
     /**
      * Searches for books by title (case-insensitive).
-     * 
+     *
      * @param title The title to search for
      * @return A list of books matching the title
      */
@@ -165,7 +168,7 @@ public class QuantumBookstore {
 
     /**
      * Searches for books by author name (case-insensitive).
-     * 
+     *
      * @param authorName The author name to search for
      * @return A list of books by the specified author
      */

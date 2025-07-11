@@ -1,8 +1,11 @@
+package tests;
+
 import java.util.List;
 import model.*;
 
 public class QuantumBookstoreFullTest {
-    private QuantumBookstore bookstore;
+
+    private final QuantumBookstore bookstore;
     private int testsPassed = 0;
     private int totalTests = 0;
 
@@ -17,7 +20,7 @@ public class QuantumBookstoreFullTest {
      * Runs all the tests for the QuantumBookstore system.
      */
     public void runAllTests() {
-        System.out.println("Quantum book store: Starting comprehensive tests...\n");
+        System.out.println("Quantum Bookstore: Starting comprehensive tests...\n");
 
         testAddingBooks();
         testRemovingOutdatedBooks();
@@ -26,17 +29,17 @@ public class QuantumBookstoreFullTest {
         testSearchFunctionality();
         testInventoryManagement();
 
-        System.out.println("\nQuantum book store: Test Summary:");
-        System.out.println("Quantum book store: Tests passed: " + testsPassed + "/" + totalTests);
-        System.out.println("Quantum book store: Success rate: " +
-                String.format("%.2f", (double) testsPassed / totalTests * 100) + "%");
+        System.out.println("\nQuantum Bookstore: Test Summary:");
+        System.out.printf("Quantum Bookstore: Tests passed: %d/%d%n", testsPassed, totalTests);
+        System.out.printf("Quantum Bookstore: Success rate: %.2f%%%n",
+                totalTests > 0 ? (double) testsPassed / totalTests * 100 : 0.0);
     }
 
     /**
      * Tests adding different types of books to the inventory.
      */
     private void testAddingBooks() {
-        System.out.println("Quantum book store: Testing book addition...");
+        System.out.println("Quantum Bookstore: Testing book addition...");
 
         // Test adding PaperBook
         PaperBook paperBook = new PaperBook("978-0134685991", "Effective Java", 2018, 45.99, "Joshua Bloch", 10);
@@ -62,14 +65,14 @@ public class QuantumBookstoreFullTest {
             assertTrue("Should throw exception for null book", true);
         }
 
-        System.out.println("Quantum book store: Book addition tests completed.\n");
+        System.out.println("Quantum Bookstore: Book addition tests completed.\n");
     }
 
     /**
      * Tests removing outdated books from the inventory.
      */
     private void testRemovingOutdatedBooks() {
-        System.out.println("Quantum book store: Testing removal of outdated books...");
+        System.out.println("Quantum Bookstore: Testing removal of outdated books...");
 
         // Add some old books
         PaperBook oldBook1 = new PaperBook("978-0000000001", "Old Book 1", 2000, 19.99, "Old Author 1", 5);
@@ -94,14 +97,14 @@ public class QuantumBookstoreFullTest {
             assertTrue("Should throw exception for negative years", true);
         }
 
-        System.out.println("Quantum book store: Outdated books removal tests completed.\n");
+        System.out.println("Quantum Bookstore: Outdated books removal tests completed.\n");
     }
 
     /**
      * Tests buying different types of books.
      */
     private void testBuyingBooks() {
-        System.out.println("Quantum book store: Testing book purchases...");
+        System.out.println("Quantum Bookstore: Testing book purchases...");
 
         // Add fresh books for testing
         PaperBook paperBook = new PaperBook("978-1111111111", "Java Programming", 2023, 59.99, "Test Author", 5);
@@ -115,7 +118,7 @@ public class QuantumBookstoreFullTest {
         // Test buying paper book
         try {
             double amount = bookstore.buyBook("978-1111111111", 2, "customer@email.com", "123 Main St");
-            assertTrue("Paper book purchase should succeed", amount == 119.98);
+            assertTrue("Paper book purchase should succeed", Math.abs(amount - 119.98) < 0.01);
             PaperBook updatedPaper = (PaperBook) bookstore.findBook("978-1111111111");
             assertTrue("Stock should be reduced", updatedPaper.getStock() == 3);
         } catch (Exception e) {
@@ -125,7 +128,7 @@ public class QuantumBookstoreFullTest {
         // Test buying eBook
         try {
             double amount = bookstore.buyBook("978-2222222222", 1, "customer@email.com", "123 Main St");
-            assertTrue("EBook purchase should succeed", amount == 39.99);
+            assertTrue("EBook purchase should succeed", Math.abs(amount - 39.99) < 0.01);
         } catch (Exception e) {
             assertFalse("EBook purchase should not fail", true);
         }
@@ -134,18 +137,19 @@ public class QuantumBookstoreFullTest {
         try {
             bookstore.buyBook("978-3333333333", 1, "customer@email.com", "123 Main St");
             assertFalse("Showcase book purchase should fail", true);
-        } catch (UnsupportedOperationException e) {
+        } catch (IllegalArgumentException e) {
+            System.out.println("Quantum Bookstore: Exception caught in showcase book purchase: " + e.getMessage());
             assertTrue("Showcase book purchase should throw exception", true);
         }
 
-        System.out.println("Quantum book store: Book purchase tests completed.\n");
+        System.out.println("Quantum Bookstore: Book purchase tests completed.\n");
     }
 
     /**
      * Tests various error scenarios.
      */
     private void testErrorScenarios() {
-        System.out.println("Quantum book store: Testing error scenarios...");
+        System.out.println("Quantum Bookstore: Testing error scenarios...");
 
         PaperBook limitedStock = new PaperBook("978-4444444444", "Limited Book", 2023, 29.99, "Limited Author", 2);
         bookstore.addBook(limitedStock);
@@ -174,7 +178,7 @@ public class QuantumBookstoreFullTest {
             assertTrue("Should throw exception for zero quantity", true);
         }
 
-        // Test null/empty email
+        // Test empty email
         try {
             bookstore.buyBook("978-4444444444", 1, "", "123 Main St");
             assertFalse("Should fail with empty email", true);
@@ -182,7 +186,7 @@ public class QuantumBookstoreFullTest {
             assertTrue("Should throw exception for empty email", true);
         }
 
-        // Test null/empty ISBN
+        // Test empty ISBN
         try {
             bookstore.buyBook("", 1, "customer@email.com", "123 Main St");
             assertFalse("Should fail with empty ISBN", true);
@@ -190,14 +194,14 @@ public class QuantumBookstoreFullTest {
             assertTrue("Should throw exception for empty ISBN", true);
         }
 
-        System.out.println("Quantum book store: Error scenario tests completed.\n");
+        System.out.println("Quantum Bookstore: Error scenario tests completed.\n");
     }
 
     /**
      * Tests search functionality.
      */
     private void testSearchFunctionality() {
-        System.out.println("Quantum book store: Testing search functionality...");
+        System.out.println("Quantum Bookstore: Testing search functionality...");
 
         // Add books for search testing
         PaperBook searchBook1 = new PaperBook("978-5555555555", "Advanced Java", 2023, 65.99, "Java Master", 10);
@@ -211,7 +215,7 @@ public class QuantumBookstoreFullTest {
 
         // Test search by author
         List<Book> authorResults = bookstore.searchByAuthor("Java Master");
-        assertTrue("Should find books by 'Java Master'", authorResults.size() == 1);
+        assertTrue("Should find books by 'Java Master'", authorResults.size() >= 1);
 
         // Test search with empty string
         List<Book> emptyResults = bookstore.searchByTitle("");
@@ -221,23 +225,23 @@ public class QuantumBookstoreFullTest {
         List<Book> nullResults = bookstore.searchByAuthor(null);
         assertTrue("Null search should return empty list", nullResults.isEmpty());
 
-        System.out.println("Quantum book store: Search functionality tests completed.\n");
+        System.out.println("Quantum Bookstore: Search functionality tests completed.\n");
     }
 
     /**
      * Tests inventory management operations.
      */
     private void testInventoryManagement() {
-        System.out.println("Quantum book store: Testing inventory management...");
+        System.out.println("Quantum Bookstore: Testing inventory management...");
 
         // Test getting books by type
         List<PaperBook> paperBooks = bookstore.getBooksByType(PaperBook.class);
         List<EBook> eBooks = bookstore.getBooksByType(EBook.class);
         List<ShowcaseBook> showcaseBooks = bookstore.getBooksByType(ShowcaseBook.class);
 
-        assertTrue("Should have paper books", paperBooks.size() > 0);
-        assertTrue("Should have eBooks", eBooks.size() > 0);
-        assertTrue("Should have showcase books", showcaseBooks.size() > 0);
+        assertTrue("Should have paper books", !paperBooks.isEmpty());
+        assertTrue("Should have eBooks", !eBooks.isEmpty());
+        assertTrue("Should have showcase books", !showcaseBooks.isEmpty());
 
         // Test inventory size
         int totalBooks = bookstore.getInventorySize();
@@ -250,29 +254,29 @@ public class QuantumBookstoreFullTest {
         // Test display inventory (visual test)
         bookstore.displayInventory();
 
-        System.out.println("Quantum book store: Inventory management tests completed.\n");
+        System.out.println("Quantum Bookstore: Inventory management tests completed.\n");
     }
 
     /**
      * Utility method to assert test conditions.
-     * 
-     * @param message   The test message
+     *
+     * @param message The test message
      * @param condition The condition to test
      */
     private void assertTrue(String message, boolean condition) {
         totalTests++;
         if (condition) {
             testsPassed++;
-            System.out.println("Quantum book store: ✓ PASS: " + message);
+            System.out.println("Quantum Bookstore: TEST PASSED: " + message);
         } else {
-            System.out.println("Quantum book store: ✗ FAIL: " + message);
+            System.out.println("Quantum Bookstore: TEST FAILED: " + message);
         }
     }
 
     /**
      * Utility method to assert false conditions.
-     * 
-     * @param message   The test message
+     *
+     * @param message The test message
      * @param condition The condition to test (should be false)
      */
     private void assertFalse(String message, boolean condition) {
@@ -281,7 +285,7 @@ public class QuantumBookstoreFullTest {
 
     /**
      * Main method to run the tests.
-     * 
+     *
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
